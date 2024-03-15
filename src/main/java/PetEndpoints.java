@@ -83,7 +83,18 @@ public class PetEndpoints {
         return gson.fromJson(responseBody, PetEndpointsForGson.class);
     }
 
-    public void deletePet(String api_key, int petId) throws IOException{
+    public void getPetId(int id) throws IOException {
+        Request request = new Request.Builder()
+                .get()
+                .url("https://petstore.swagger.io/v2/pet/" + id)
+                .build();
+
+        OkHttpClient okHttpClient = new OkHttpClient();
+        Response response = okHttpClient.newCall(request).execute();
+        System.out.println(response.body().string());
+    }
+
+    public void deletePet(int petId) throws IOException{
         JSONObject jsonObject = new JSONObject();
         jsonObject.remove(String.valueOf(petId));
 
@@ -92,7 +103,6 @@ public class PetEndpoints {
         Request request = new Request.Builder()
                 .post(requestBody)
                 .url("https://petstore.swagger.io/v2/pet/" + petId)
-                .header("api_key", api_key)
                 .build();
 
         OkHttpClient okHttpClient = new OkHttpClient();

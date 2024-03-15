@@ -29,4 +29,16 @@ public class PetTest {
 
         System.out.println("Second gson: " + petEndpoints.addNewPet_gson(dog));
     }
+
+    @Test
+    public void getPetId() throws IOException {
+        PetEndpoints petEndpoints = new PetEndpoints();
+        petEndpoints.getPetId(9);
+    }
+
+    @Test
+    public void deletePet() throws IOException {
+        PetEndpoints petEndpoints = new PetEndpoints();
+        petEndpoints.deletePet(13);
+    }
 }
