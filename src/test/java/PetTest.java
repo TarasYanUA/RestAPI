@@ -31,14 +31,26 @@ public class PetTest {
     }
 
     @Test
-    public void getPetId() throws IOException {
+    public void findPetById() throws IOException {
         PetEndpoints petEndpoints = new PetEndpoints();
-        petEndpoints.getPetId(9);
+        petEndpoints.findPetById(9);
+    }
+
+    @Test
+    public void findPetByStatus() throws IOException {
+        PetEndpoints petEndpoints = new PetEndpoints();
+        petEndpoints.findPetByStatus("domestic");
     }
 
     @Test
     public void deletePet() throws IOException {
         PetEndpoints petEndpoints = new PetEndpoints();
         petEndpoints.deletePet(13);
+    }
+
+    @Test
+    public void updatePet() throws IOException {
+        PetEndpoints petEndpoints = new PetEndpoints();
+        petEndpoints.updatePet(9, "Tigran", "wild");
     }
 }

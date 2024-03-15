@@ -83,10 +83,21 @@ public class PetEndpoints {
         return gson.fromJson(responseBody, PetEndpointsForGson.class);
     }
 
-    public void getPetId(int id) throws IOException {
+    public void findPetById(int id) throws IOException {
         Request request = new Request.Builder()
                 .get()
                 .url("https://petstore.swagger.io/v2/pet/" + id)
+                .build();
+
+        OkHttpClient okHttpClient = new OkHttpClient();
+        Response response = okHttpClient.newCall(request).execute();
+        System.out.println(response.body().string());
+    }
+
+    public void findPetByStatus(String status) throws IOException {
+        Request request = new Request.Builder()
+                .get()
+                .url("https://petstore.swagger.io/v2/pet/findByStatus?status=" + status)
                 .build();
 
         OkHttpClient okHttpClient = new OkHttpClient();
@@ -103,6 +114,25 @@ public class PetEndpoints {
         Request request = new Request.Builder()
                 .post(requestBody)
                 .url("https://petstore.swagger.io/v2/pet/" + petId)
+                .build();
+
+        OkHttpClient okHttpClient = new OkHttpClient();
+        Response response = okHttpClient.newCall(request).execute();
+        String responseBody = response.body().string();
+        System.out.println(responseBody);
+    }
+
+    public void updatePet(long petID, String petName, String petStatus) throws IOException{
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("id", petID);
+        jsonObject.put("name", petName);
+        jsonObject.put("status", petStatus);
+
+        RequestBody requestBody = RequestBody.create(jsonObject.toString().getBytes());
+        Request request = new Request.Builder()
+                .put(requestBody)
+                .url("https://petstore.swagger.io/v2/pet")
+                .header("Content-Type", "application/json")
                 .build();
 
         OkHttpClient okHttpClient = new OkHttpClient();
