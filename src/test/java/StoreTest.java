@@ -8,6 +8,11 @@ public class StoreTest {
     }
 
     @Test
+    public void placeAnOrder_Json() throws IOException {
+        new StoreEndpoints().placeAnOrder_Json(136, 4678, 2, true);
+    }
+
+    @Test
     public void placeAnOrder_Gson() throws IOException {
         StoreEndpointsForGson storeEndpointsForGson = new StoreEndpointsForGson();
         storeEndpointsForGson.setId(177);
@@ -16,7 +21,7 @@ public class StoreTest {
         storeEndpointsForGson.setComplete(true);
 
         StoreEndpoints storeEndpoints = new StoreEndpoints();
-        storeEndpoints.placeTheOrder_Gson(storeEndpointsForGson);
+        storeEndpoints.placeAnOrder_Gson(storeEndpointsForGson);
     }
 
     @Test
